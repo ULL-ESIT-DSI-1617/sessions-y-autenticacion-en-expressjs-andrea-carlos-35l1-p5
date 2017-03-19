@@ -14,6 +14,14 @@ app.use(session({
     saveUninitialized: true
 }));
 
+//Comprueba si ya esta autorizado en esta sesion
+var auth = function(req, res, next) {
+  if (req.session && req.session.user in users)
+    return next();
+  else
+    return res.sendStatus(401);
+};
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
