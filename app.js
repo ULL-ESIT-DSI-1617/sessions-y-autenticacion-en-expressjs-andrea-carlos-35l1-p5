@@ -60,7 +60,11 @@ app.post('/registrar', function(req, res){
     res.render('registrar');
   } else {
     registrar(req.body.username, req.body.password)
-    res.render('noautentificado', { message: 'registrado' } );
+    res.render('noautentificado', { message: 'Registro completado satisfactoriamente.' } );
+
+    jsonfile.writeFile(file, users, {spaces: 2}, (err)=>{
+      console.error(err);
+    });
   }
 })
 
