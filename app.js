@@ -54,7 +54,7 @@ app.post('/login', function(req, res){
     }
   });
 
-app.use('/content', express.static(path.join(__dirname, 'public')));
+app.use('/content',auth, express.static(path.join(__dirname, 'public')));
 
   var server = app.listen(8087, function() {
 	var host = server.address().address
