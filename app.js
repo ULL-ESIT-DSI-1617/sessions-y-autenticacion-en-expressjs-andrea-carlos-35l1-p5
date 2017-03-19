@@ -46,11 +46,6 @@ app.get('/login', function(req, res){
   res.render('login');
 });
 
-var users = {
-	andrea : bcrypt.hashSync("andreapass"),
-	carlos : bcrypt.hashSync("carlos")
-};
-
 //Genera el json con los usuarios especificados en la variable users
 
 jsonfile.writeFile(file, users, {spaces: 2}, (err)=>{
