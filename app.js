@@ -6,7 +6,7 @@ var bcrypt = require('bcrypt-nodejs');
 var session = require('express-session');
 var file = './user.json'
 var jsonfile = require('jsonfile');
-
+var users = require('./user.json');
 //permite coger parámetros de la url(query string)
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -15,6 +15,10 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+
+var registrar = function(user, pass){
+  users[user] = bcrypt.hashSync(pass);
+}
 
 //Comprueba si ya esta autorizado en esta sesion
 var auth = function(req, res, next) {
@@ -33,6 +37,10 @@ app.get('/', function(req, res){
 });
 
 
+app.get('/', function(req, res){
+  res.render('noautentificado', { message: 'Para acceder al contenido es necesario autentificarse:' } );
+});
+
 //Muestra la vista con el formulario para log in
 app.get('/login', function(req, res){
   res.render('login');
@@ -44,9 +52,32 @@ var users = {
 };
 
 //Genera el json con los usuarios especificados en la variable users
+
 jsonfile.writeFile(file, users, {spaces: 2}, (err)=>{
 	console.error(err);
 });
+
+app.get('/registrar', function(req, res){
+  res.render('registrar')
+})
+
+app.post('/registrar', function(req, res){
+  if (!req.body.username || !req.body.password) {
+    console.log('registrar failed');
+      res.render('registrar');
+  } else if(req.body.username in users) {
+
+    console.log('registrado fallido');
+    res.render('registrar');
+  } else {
+    registrar(req.body.username, req.body.password)
+    res.render('noautentificado', { message: 'Registro completado satisfactoriamente.' } );
+
+    jsonfile.writeFile(file, users, {spaces: 2}, (err)=>{
+      console.error(err);
+    });
+  }
+})
 
 //Obtiene la respuesta del formulario y comprueba si es correcto
 app.post('/login', function(req, res){
