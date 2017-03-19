@@ -1,6 +1,11 @@
 var express = require('express')
 var app = express()
 var path = require('path');
+var bodyParser = require('body-parser');
+var bcrypt = require('bcrypt-nodejs');
+
+//permite coger parámetros de la url (query string)
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -9,6 +14,11 @@ app.set('view engine', 'ejs');
 app.get('/login', function(req, res){
   res.render('login');
 });
+
+var users = {
+	andrea : bcrypt.hashSync("andreapass"),
+	carlos : bcrypt.hashSync("carlospass")
+};
 
 //Obtiene la respuesta del formulario y comprueba si es correcto
 app.post('/login', function(req, res){
