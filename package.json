@@ -2,6 +2,9 @@
   "name": "sessions-y-autenticacion-en-expressjs-andrea-carlos-35l1-p5",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+   "node": "7.6.0"
+  },
   "main": "index.js",
   "directories": {
     "doc": "docs"
