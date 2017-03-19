@@ -98,7 +98,7 @@ app.post('/login', function(req, res){
 
 app.use('/content',auth, express.static(path.join(__dirname, 'public')));
 
-  var server = app.listen(8087, function() {
+  var server = app.listen(process.env.PORT || 8087, ()=> {
 	var host = server.address().address
 	var port = server.address().port
 
