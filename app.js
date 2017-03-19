@@ -4,7 +4,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 
-//permite coger parámetros de la url (query string)
+//permite coger parámetros de la url(query string)
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set('views', path.join(__dirname, 'views'));
