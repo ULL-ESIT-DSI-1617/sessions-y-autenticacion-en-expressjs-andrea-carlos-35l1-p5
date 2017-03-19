@@ -4,9 +4,16 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
 var session = require('express-session');
+var file = './user.json'
+var jsonfile = require('jsonfile');
 
 //permite coger parámetros de la url(query string)
 app.use(bodyParser.urlencoded({ extended: false }));
+
+var hash = bcrypt.hashSync("contraseña");
+console.log('contraseña de usuario encriptada:', hash);
+
+
 
 app.use(session({
     secret: 'example',
@@ -36,6 +43,10 @@ var users = {
 	andrea : bcrypt.hashSync("andreapass"),
 	carlos : bcrypt.hashSync("carlos")
 };
+
+jsonfile.writeFile(file, users, {spaces: 2}, (err)=>{
+	console.error(err);
+});
 
 //Obtiene la respuesta del formulario y comprueba si es correcto
 app.post('/login', function(req, res){
