@@ -10,11 +10,6 @@ var jsonfile = require('jsonfile');
 //permite coger parámetros de la url(query string)
 app.use(bodyParser.urlencoded({ extended: false }));
 
-var hash = bcrypt.hashSync("contraseña");
-console.log('contraseña de usuario encriptada:', hash);
-
-
-
 app.use(session({
     secret: 'example',
     resave: true,
