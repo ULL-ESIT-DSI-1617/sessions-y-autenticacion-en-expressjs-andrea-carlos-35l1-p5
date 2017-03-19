@@ -1,8 +1,8 @@
 # Introducción
 
-## Práctica 4 de la asignatura de Desarrollo de Sistemas Informáticos
+## Práctica 5 de la asignatura de Desarrollo de Sistemas Informáticos
 
-### Estudiar las Cookies y las Sessions en ExpressJS
+### Sessions y Autenticación en ExpressJS
 
 #### Enlaces:
 
