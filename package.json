@@ -21,5 +21,8 @@
   "homepage": "https://github.com/ULL-ESIT-DSI-1617/sessions-y-autenticacion-en-expressjs-andrea-carlos-35l1-p5#readme",
   "devDependencies": {
     "gitbook-cli": "^2.3.0"
+  },
+  "dependencies": {
+    "express": "^4.15.2"
   }
 }
