@@ -27,6 +27,10 @@ var auth = function(req, res, next) {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+//En la raiz pone las opciones para login y acceder contenido (no deberia poder acceder al no estar autentificado)
+app.get('/', function(req, res){
+  res.render('noautentificado', { message: 'Para acceder al contenido es necesario autentificarse:' } );
+});
 
 
 //Muestra la vista con el formulario para log in
@@ -39,6 +43,7 @@ var users = {
 	carlos : bcrypt.hashSync("carlos")
 };
 
+//Genera el json con los usuarios especificados en la variable users
 jsonfile.writeFile(file, users, {spaces: 2}, (err)=>{
 	console.error(err);
 });
