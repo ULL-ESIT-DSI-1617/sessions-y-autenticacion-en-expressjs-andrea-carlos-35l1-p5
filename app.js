@@ -59,6 +59,11 @@ app.post('/login', function(req, res){
       res.render('noautentificado', { message: 'Login Failed' } );
     }
   });
+  //Borra la sesion.
+  app.get('/logout', function (req, res) {
+    req.session.destroy();
+    res.render('noautentificado', { message: 'Sesion cerrada correctamente.' } );
+  });
 
 app.use('/content',auth, express.static(path.join(__dirname, 'public')));
 
