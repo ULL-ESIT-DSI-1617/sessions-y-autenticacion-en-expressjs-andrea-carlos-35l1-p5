@@ -3,12 +3,21 @@ var app = express()
 var path = require('path');
 var bodyParser = require('body-parser');
 var bcrypt = require('bcrypt-nodejs');
+var session = require('express-session');
 
 //permite coger parámetros de la url(query string)
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(session({
+    secret: 'example',
+    resave: true,
+    saveUninitialized: true
+}));
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+
 
 //Muestra la vista con el formulario para log in
 app.get('/login', function(req, res){
@@ -17,7 +26,7 @@ app.get('/login', function(req, res){
 
 var users = {
 	andrea : bcrypt.hashSync("andreapass"),
-	carlos : bcrypt.hashSync("carlospass")
+	carlos : bcrypt.hashSync("carlos")
 };
 
 //Obtiene la respuesta del formulario y comprueba si es correcto
